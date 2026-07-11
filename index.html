@@ -48,12 +48,44 @@ button{
 
 <div class="vehicle" id="carNumber"></div>
 
-<button>🟢 تعمل</button>
+<button onclick="working()">🟢 تعمل</button>
 
-<button>🔴 لا تعمل</button>
+<button onclick="notWorking()">🔴 لا تعمل</button>
+
+<div id="faultBox" style="display:none;margin-top:15px;">
+
+<textarea id="notes"
+placeholder="اكتب وصف العطل هنا"
+style="width:100%;height:80px;"></textarea>
 
 </div>
 
+<button id="saveBtn"
+onclick="saveData()"
+style="display:none;margin-top:15px;">
+💾 حفظ
+</button>
+
+</div>
+let status="";
+
+function working(){
+    status="تعمل";
+    document.getElementById("faultBox").style.display="none";
+    document.getElementById("saveBtn").style.display="block";
+}
+
+function notWorking(){
+    status="لا تعمل";
+    document.getElementById("faultBox").style.display="block";
+    document.getElementById("saveBtn").style.display="block";
+}
+
+function saveData(){
+
+    alert("✅ تم تسجيل بدء العمل بنجاح");
+
+}
 <script>
 
 const params=new URLSearchParams(window.location.search);
