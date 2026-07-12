@@ -1,10 +1,8 @@
-/* ========= ATP Vehicle Management ========= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Tahoma, Arial, sans-serif;
 }
 
 body{
@@ -13,113 +11,165 @@ body{
 }
 
 header{
-    background:#0d6efd;
+    background:#0f4c81;
     color:white;
-    padding:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
+    padding:20px;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 header h1{
-    font-size:22px;
+    text-align:center;
+    margin-bottom:20px;
 }
 
-.topButtons{
+.stats{
     display:flex;
     gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
-button{
-    border:none;
-    padding:10px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-}
-
-#adminBtn{
-    background:#198754;
+.card{
+    width:110px;
+    height:70px;
+    border-radius:10px;
     color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
 }
 
-#addBtn{
-    background:#fd7e14;
-    color:white;
+.card span{
+    font-size:24px;
 }
 
-.tableContainer{
-    padding:15px;
-    overflow:auto;
+.green{
+    background:#2e7d32;
 }
 
-table{
+.red{
+    background:#c62828;
+}
+
+.yellow{
+    background:#f9a825;
+    color:black;
+}
+
+#search{
     width:100%;
-    border-collapse:collapse;
-    background:white;
-}
-
-th{
-    background:#0d6efd;
-    color:white;
+    max-width:500px;
+    display:block;
+    margin:auto;
     padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
 }
 
-td{
-    border:1px solid #ddd;
-    padding:10px;
+.vehicle-list{
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:15px;
+}
+
+.vehicle{
+    padding:20px;
+    border-radius:12px;
+    color:white;
     text-align:center;
+    font-size:22px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:bold;
 }
 
-tr:nth-child(even){
-    background:#f8f9fa;
+.vehicle:hover{
+    transform:scale(1.04);
 }
 
-input,
-select{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:1px solid #ccc;
-    border-radius:6px;
+.vehicle.green{
+    background:#2e7d32;
 }
 
-.modal{
-    display:none;
+.vehicle.red{
+    background:#c62828;
+}
+
+.vehicle.yellow{
+    background:#f9a825;
+    color:black;
+}
+
+.popup{
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    inset:0;
     background:rgba(0,0,0,.45);
+    display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.modalContent{
-    width:95%;
-    max-width:400px;
+.hidden{
+    display:none;
+}
+
+.popup-box{
+    width:90%;
+    max-width:380px;
     background:white;
-    padding:20px;
-    border-radius:12px;
+    border-radius:15px;
+    padding:25px;
 }
 
-.modalContent h2{
-    margin-bottom:15px;
+.popup-box h2{
+    text-align:center;
+    margin-bottom:20px;
 }
 
-.modalButtons{
-    display:flex;
-    justify-content:space-between;
-    margin-top:15px;
-}
-
-textarea{
+.popup-box button{
     width:100%;
-    min-height:80px;
-    border:1px solid #ccc;
-    border-radius:6px;
-    padding:8px;
-    resize:vertical;
+    margin:8px 0;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#maintenanceBtn{
+    background:#d32f2f;
+    color:white;
+}
+
+#absenceBtn{
+    background:#f9a825;
+}
+
+#detailsBtn{
+    background:#1976d2;
+    color:white;
+}
+
+.close{
+    background:#616161;
+    color:white;
+}
+
+@media(max-width:600px){
+
+.vehicle-list{
+grid-template-columns:1fr;
+}
+
+.vehicle{
+font-size:20px;
+}
+
 }
