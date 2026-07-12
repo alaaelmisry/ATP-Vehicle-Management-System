@@ -13,10 +13,16 @@ const search = document.getElementById("search");
 
 const popup = document.getElementById("popup");
 const vehicleTitle = document.getElementById("vehicleTitle");
-const closeBtn = document.getElementById("closeBtn");
+
+
+const passwordPopup = document.getElementById("passwordPopup");
+const passwordInput = document.getElementById("passwordInput");
+
 
 
 let selectedVehicle = null;
+
+let requestedStatus = null;
 
 
 
@@ -25,9 +31,9 @@ let selectedVehicle = null;
 function displayVehicles(list = vehicles){
 
 
-    privateList.innerHTML = "";
-    truckList.innerHTML = "";
-    equipmentList.innerHTML = "";
+    privateList.innerHTML="";
+    truckList.innerHTML="";
+    equipmentList.innerHTML="";
 
 
     let working = 0;
@@ -40,71 +46,66 @@ function displayVehicles(list = vehicles){
 
 
 
-        if(vehicle.status === "working")
+        if(vehicle.status==="working")
             working++;
 
 
-        if(vehicle.status === "fault")
+        if(vehicle.status==="fault")
             fault++;
 
 
-        if(vehicle.status === "absence")
+        if(vehicle.status==="absence")
             absence++;
 
 
 
 
-        let card = document.createElement("div");
-
-        card.className = "vehicle-card";
+        let card=document.createElement("div");
 
 
-
-        let statusText = "";
-        let statusClass = "";
+        card.className="vehicle-card";
 
 
 
-        switch(vehicle.status){
-
-
-            case "working":
-
-                statusText = "تعمل";
-                statusClass = "status-working";
-
-            break;
+        let statusText="";
+        let statusClass="";
 
 
 
-            case "fault":
+        if(vehicle.status==="working"){
 
-                statusText = "لا تعمل";
-                statusClass = "status-fault";
+            statusText="تعمل";
+            statusClass="status-working";
 
-            break;
+        }
 
 
 
-            case "absence":
+        else if(vehicle.status==="fault"){
 
-                statusText = "غياب";
-                statusClass = "status-absence";
+            statusText="لا تعمل";
+            statusClass="status-fault";
 
-            break;
+        }
 
+
+
+        else if(vehicle.status==="absence"){
+
+            statusText="غياب";
+            statusClass="status-absence";
 
         }
 
 
 
 
-        card.innerHTML = `
+
+        card.innerHTML=`
 
         <div class="vehicle-number">
         ${vehicle.number}
         </div>
-
 
         <div class="status ${statusClass}">
         ${statusText}
@@ -114,7 +115,7 @@ function displayVehicles(list = vehicles){
 
 
 
-        card.onclick = function(){
+        card.onclick=function(){
 
             openPopup(vehicle);
 
@@ -123,21 +124,21 @@ function displayVehicles(list = vehicles){
 
 
 
-        if(vehicle.type === "private"){
+        if(vehicle.type==="private"){
 
             privateList.appendChild(card);
 
         }
 
 
-        else if(vehicle.type === "truck"){
+        else if(vehicle.type==="truck"){
 
             truckList.appendChild(card);
 
         }
 
 
-        else if(vehicle.type === "equipment"){
+        else if(vehicle.type==="equipment"){
 
             equipmentList.appendChild(card);
 
@@ -149,11 +150,12 @@ function displayVehicles(list = vehicles){
 
 
 
-    workingCount.textContent = working;
 
-    faultCount.textContent = fault;
+    workingCount.textContent=working;
 
-    absenceCount.textContent = absence;
+    faultCount.textContent=fault;
+
+    absenceCount.textContent=absence;
 
 
 
@@ -165,19 +167,40 @@ function displayVehicles(list = vehicles){
 
 
 
-// فتح نافذة المركبة
+// فتح تفاصيل المركبة
 
 function openPopup(vehicle){
 
 
-    popup.classList.remove("hidden");
+    selectedVehicle = vehicle;
 
 
     vehicleTitle.textContent =
     "المركبة : " + vehicle.number;
 
 
-    selectedVehicle = vehicle;
+    popup.classList.remove("hidden");
+
+
+}
+
+
+
+
+
+
+// طلب تغيير الحالة
+
+function requestStatusChange(status){
+
+
+    requestedStatus=status;
+
+
+    passwordInput.value="";
+
+
+    passwordPopup.classList.remove("hidden");
 
 
 }
@@ -189,50 +212,64 @@ function openPopup(vehicle){
 
 
 
-// تغيير حالة المركبة
+// فحص الرقم السري
 
-function changeStatus(status){
-
-
-    if(!selectedVehicle)
-        return;
+function checkPassword(){
 
 
-
-    selectedVehicle.status = status;
+    if(passwordInput.value==="16996"){
 
 
 
-
-    let record = {
-
-
-        vehicle: selectedVehicle.number,
-
-
-        status: status,
-
-
-        date: new Date().toLocaleDateString("ar-SA"),
-
-
-        time: new Date().toLocaleTimeString("ar-SA")
-
-
-    };
-
-
-
-    console.log("تم تسجيل:", record);
+        selectedVehicle.status=requestedStatus;
 
 
 
 
-    displayVehicles();
+        let record={
+
+
+            vehicle:selectedVehicle.number,
+
+
+            status:requestedStatus,
+
+
+            date:new Date().toLocaleDateString("ar-SA"),
+
+
+            time:new Date().toLocaleTimeString("ar-SA")
+
+
+        };
 
 
 
-    popup.classList.add("hidden");
+        console.log("تم تعديل الحالة:",record);
+
+
+
+        displayVehicles();
+
+
+
+        passwordPopup.classList.add("hidden");
+
+
+        popup.classList.add("hidden");
+
+
+
+    }
+
+
+    else{
+
+
+        alert("❌ الرقم السري غير صحيح");
+
+
+    }
 
 
 
@@ -245,16 +282,30 @@ function changeStatus(status){
 
 
 
-// إغلاق النافذة
+// إغلاق نافذة المركبة
 
-closeBtn.onclick = function(){
+function closeVehiclePopup(){
 
 
     popup.classList.add("hidden");
 
 
-};
+}
 
+
+
+
+
+
+// إلغاء الرقم السري
+
+function closePassword(){
+
+
+    passwordPopup.classList.add("hidden");
+
+
+}
 
 
 
@@ -264,14 +315,14 @@ closeBtn.onclick = function(){
 
 // البحث
 
-search.addEventListener("input", function(){
+search.addEventListener("input",function(){
 
 
-    let value = this.value.trim();
+    let value=this.value.trim();
 
 
 
-    let result = vehicles.filter(vehicle =>
+    let result=vehicles.filter(vehicle=>
 
 
         vehicle.number.includes(value)
@@ -293,7 +344,6 @@ search.addEventListener("input", function(){
 
 
 
-
-// تشغيل الصفحة
+// تشغيل النظام
 
 displayVehicles();
