@@ -1,151 +1,206 @@
-// ==========================
-// ATP Vehicle Management
-// script.js
-// ==========================
+const privateList = document.getElementById("privateList");
+const truckList = document.getElementById("truckList");
+const equipmentList = document.getElementById("equipmentList");
 
-// سيتم تحميل بيانات المركبات من data.js
-let vehicles = vehicleData;
-
-// عناصر الصفحة
-const vehicleList = document.getElementById("vehicleList");
-const search = document.getElementById("search");
-
-const popup = document.getElementById("popup");
-const vehicleTitle = document.getElementById("vehicleTitle");
-
-const maintenanceBtn = document.getElementById("maintenanceBtn");
-const absenceBtn = document.getElementById("absenceBtn");
-const detailsBtn = document.getElementById("detailsBtn");
-const closeBtn = document.getElementById("closeBtn");
 
 const workingCount = document.getElementById("workingCount");
 const faultCount = document.getElementById("faultCount");
 const absenceCount = document.getElementById("absenceCount");
 
-let selectedVehicle = null;
 
-// رسم المركبات
-function drawVehicles(list) {
+const search = document.getElementById("search");
 
-    vehicleList.innerHTML = "";
 
-    list.forEach(vehicle => {
+const popup = document.getElementById("popup");
+const vehicleTitle = document.getElementById("vehicleTitle");
 
-        const card = document.createElement("div");
+const closeBtn = document.getElementById("closeBtn");
 
-        card.className = "vehicle " + vehicle.status;
 
-        card.innerHTML = vehicle.number;
 
-        card.onclick = function () {
 
-            selectedVehicle = vehicle;
 
-            vehicleTitle.innerHTML = vehicle.number;
+function displayVehicles(list = vehicles){
 
-            popup.classList.remove("hidden");
+
+    privateList.innerHTML="";
+    truckList.innerHTML="";
+    equipmentList.innerHTML="";
+
+
+    let working = 0;
+    let fault = 0;
+    let absence = 0;
+
+
+
+    list.forEach(vehicle=>{
+
+
+        if(vehicle.status==="working")
+            working++;
+
+        if(vehicle.status==="fault")
+            fault++;
+
+        if(vehicle.status==="absence")
+            absence++;
+
+
+
+
+        let card = document.createElement("div");
+
+        card.className="vehicle-card";
+
+
+
+        let statusText="";
+
+        let statusClass="";
+
+
+
+        if(vehicle.status==="working"){
+
+            statusText="تعمل";
+            statusClass="status-working";
+
+        }
+
+
+        if(vehicle.status==="fault"){
+
+            statusText="عطل";
+            statusClass="status-fault";
+
+        }
+
+
+        if(vehicle.status==="absence"){
+
+            statusText="غياب";
+            statusClass="status-absence";
+
+        }
+
+
+
+
+        card.innerHTML=`
+
+        <div class="vehicle-number">
+        ${vehicle.number}
+        </div>
+
+        <div class="status ${statusClass}">
+        ${statusText}
+        </div>
+
+        `;
+
+
+
+        card.onclick=function(){
+
+            openPopup(vehicle);
 
         };
 
-        vehicleList.appendChild(card);
+
+
+
+        if(vehicle.type==="private"){
+
+            privateList.appendChild(card);
+
+        }
+
+
+
+        else if(vehicle.type==="truck"){
+
+            truckList.appendChild(card);
+
+        }
+
+
+
+        else if(vehicle.type==="equipment"){
+
+            equipmentList.appendChild(card);
+
+        }
+
+
 
     });
 
-    updateCounters();
+
+
+    workingCount.textContent=working;
+    faultCount.textContent=fault;
+    absenceCount.textContent=absence;
+
+
 
 }
 
-// تحديث العدادات
-function updateCounters() {
 
-    let green = 0;
-    let red = 0;
-    let yellow = 0;
 
-    vehicles.forEach(v => {
 
-        if (v.status == "green") green++;
 
-        if (v.status == "red") red++;
 
-        if (v.status == "yellow") yellow++;
 
-    });
+function openPopup(vehicle){
 
-    workingCount.innerHTML = green;
-    faultCount.innerHTML = red;
-    absenceCount.innerHTML = yellow;
+
+    popup.classList.remove("hidden");
+
+
+    vehicleTitle.textContent =
+    "المركبة : " + vehicle.number;
+
 
 }
 
-// البحث
-search.addEventListener("keyup", function () {
 
-    let value = search.value.toLowerCase();
 
-    let result = vehicles.filter(v =>
-        v.number.toLowerCase().includes(value)
+
+
+
+
+closeBtn.onclick=function(){
+
+    popup.classList.add("hidden");
+
+};
+
+
+
+
+
+search.addEventListener("input",function(){
+
+
+    let value=this.value.trim();
+
+
+    let result = vehicles.filter(v=>
+
+        v.number.includes(value)
+
     );
 
-    drawVehicles(result);
+
+    displayVehicles(result);
+
+
 
 });
 
-// طلب صيانة
-maintenanceBtn.onclick = function () {
 
-    if (!selectedVehicle) return;
 
-    selectedVehicle.status = "red";
 
-    popup.classList.add("hidden");
 
-    drawVehicles(vehicles);
-
-};
-
-// إشعار غياب
-absenceBtn.onclick = function () {
-
-    if (!selectedVehicle) return;
-
-    selectedVehicle.status = "yellow";
-
-    popup.classList.add("hidden");
-
-    drawVehicles(vehicles);
-
-};
-
-// التفاصيل
-detailsBtn.onclick = function () {
-
-    if (!selectedVehicle) return;
-
-    alert(
-        "رقم المركبة : " + selectedVehicle.number +
-        "\n\nالحالة : " + selectedVehicle.status
-    );
-
-};
-
-// إغلاق النافذة
-closeBtn.onclick = function () {
-
-    popup.classList.add("hidden");
-
-};
-
-// إغلاق عند الضغط خارج النافذة
-popup.onclick = function (e) {
-
-    if (e.target == popup) {
-
-        popup.classList.add("hidden");
-
-    }
-
-};
-
-// بدء التشغيل
-drawVehicles(vehicles);
+displayVehicles();
