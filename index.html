@@ -1,83 +1,147 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATP Vehicle Management</title>
 
-    <link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ATP Vehicle Management</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
+
 
 <header>
 
-    <h1>🚗 ATP Vehicle Management</h1>
+<h1>🚗 ATP Vehicle Management</h1>
 
-    <div class="stats">
-        <div class="card green">
-            <span id="workingCount">0</span>
-            <small>تعمل</small>
-        </div>
 
-        <div class="card red">
-            <span id="faultCount">0</span>
-            <small>أعطال</small>
-        </div>
+<div class="stats">
 
-        <div class="card yellow">
-            <span id="absenceCount">0</span>
-            <small>غياب</small>
-        </div>
-    </div>
+<div class="card green">
+<span id="workingCount">0</span>
+<small>تعمل</small>
+</div>
 
-    <input
-        type="text"
-        id="search"
-        placeholder="ابحث برقم المركبة..."
-    >
 
-</header>
+<div class="card red">
+<span id="faultCount">0</span>
+<small>أعطال</small>
+</div>
 
-<main>
 
-    <div id="vehicleList" class="vehicle-list">
-
-        <!-- سيتم إنشاء المركبات تلقائياً -->
-
-    </div>
-
-</main>
-
-<!-- نافذة الخيارات -->
-
-<div id="popup" class="popup hidden">
-
-    <div class="popup-box">
-
-        <h2 id="vehicleTitle"></h2>
-
-        <button id="maintenanceBtn">
-            🔧 طلب صيانة
-        </button>
-
-        <button id="absenceBtn">
-            👤 إشعار غياب
-        </button>
-
-        <button id="detailsBtn">
-            📄 التفاصيل
-        </button>
-
-        <button id="closeBtn" class="close">
-            إغلاق
-        </button>
-
-    </div>
+<div class="card yellow">
+<span id="absenceCount">0</span>
+<small>غياب</small>
+</div>
 
 </div>
 
+
+<input 
+type="text" 
+id="search"
+placeholder="ابحث برقم المركبة..."
+>
+
+
+</header>
+
+
+
+<main>
+
+
+<div class="categories">
+
+
+<section class="category">
+
+<h2>PRIVATE</h2>
+
+<div id="privateList" class="vehicle-list"></div>
+
+</section>
+
+
+
+<section class="category">
+
+<h2>TRUCKS</h2>
+
+<div id="truckList" class="vehicle-list"></div>
+
+</section>
+
+
+
+<section class="category">
+
+<h2>EQUIPMENTS</h2>
+
+<div id="equipmentList" class="vehicle-list"></div>
+
+</section>
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+<div id="popup" class="popup hidden">
+
+
+<div class="popup-box">
+
+
+<h2 id="vehicleTitle"></h2>
+
+
+<button id="maintenanceBtn">
+🔧 طلب صيانة
+</button>
+
+
+<button id="absenceBtn">
+👤 إشعار غياب
+</button>
+
+
+<button id="detailsBtn">
+📄 التفاصيل
+</button>
+
+
+<button id="closeBtn" class="close">
+إغلاق
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
 <script src="data.js"></script>
-<script src="scribt.js"></script>
+
+<script src="script.js"></script>
+
 
 </body>
+
 </html>
