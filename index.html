@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ATP Vehicle Management</title>
@@ -40,17 +41,21 @@
 <small>غياب</small>
 </div>
 
+
 </div>
 
 
+
 <input 
-type="text" 
 id="search"
+type="text"
 placeholder="ابحث برقم المركبة..."
 >
 
 
 </header>
+
+
 
 
 
@@ -60,6 +65,7 @@ placeholder="ابحث برقم المركبة..."
 <div class="categories">
 
 
+
 <section class="category">
 
 <h2>PRIVATE</h2>
@@ -67,6 +73,7 @@ placeholder="ابحث برقم المركبة..."
 <div id="privateList" class="vehicle-list"></div>
 
 </section>
+
 
 
 
@@ -80,6 +87,7 @@ placeholder="ابحث برقم المركبة..."
 
 
 
+
 <section class="category">
 
 <h2>EQUIPMENTS</h2>
@@ -87,6 +95,7 @@ placeholder="ابحث برقم المركبة..."
 <div id="equipmentList" class="vehicle-list"></div>
 
 </section>
+
 
 
 </div>
@@ -98,7 +107,8 @@ placeholder="ابحث برقم المركبة..."
 
 
 
-<!-- نافذة التحكم -->
+
+<!-- نافذة المركبة -->
 
 
 <div id="popup" class="popup hidden">
@@ -111,39 +121,80 @@ placeholder="ابحث برقم المركبة..."
 
 
 
-<button onclick="changeStatus('working')">
+<button onclick="requestStatusChange('working')">
 ✅ تعمل
 </button>
 
 
 
-<button onclick="changeStatus('fault')">
+<button onclick="requestStatusChange('fault')">
 ❌ لا تعمل
 </button>
 
 
 
-<button onclick="changeStatus('absence')">
+<button onclick="requestStatusChange('absence')">
 👤 غياب
 </button>
 
 
 
-<button id="detailsBtn">
-📄 التفاصيل
-</button>
-
-
-
-<button id="closeBtn" class="close">
+<button class="close" onclick="closeVehiclePopup()">
 إغلاق
 </button>
 
 
+
 </div>
 
 
 </div>
+
+
+
+
+
+
+
+<!-- نافذة الرقم السري -->
+
+
+<div id="passwordPopup" class="popup hidden">
+
+
+<div class="popup-box">
+
+
+<h2>
+🔐 صلاحية المشرف
+</h2>
+
+
+
+<input 
+id="passwordInput"
+type="password"
+placeholder="أدخل الرقم السري"
+>
+
+
+
+<button onclick="checkPassword()">
+دخول
+</button>
+
+
+
+<button class="close" onclick="closePassword()">
+إلغاء
+</button>
+
+
+</div>
+
+
+</div>
+
 
 
 
