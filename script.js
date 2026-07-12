@@ -13,19 +13,21 @@ const search = document.getElementById("search");
 
 const popup = document.getElementById("popup");
 const vehicleTitle = document.getElementById("vehicleTitle");
-
 const closeBtn = document.getElementById("closeBtn");
 
 
+let selectedVehicle = null;
 
 
+
+// عرض المركبات
 
 function displayVehicles(list = vehicles){
 
 
-    privateList.innerHTML="";
-    truckList.innerHTML="";
-    equipmentList.innerHTML="";
+    privateList.innerHTML = "";
+    truckList.innerHTML = "";
+    equipmentList.innerHTML = "";
 
 
     let working = 0;
@@ -34,16 +36,19 @@ function displayVehicles(list = vehicles){
 
 
 
-    list.forEach(vehicle=>{
+    list.forEach(vehicle => {
 
 
-        if(vehicle.status==="working")
+
+        if(vehicle.status === "working")
             working++;
 
-        if(vehicle.status==="fault")
+
+        if(vehicle.status === "fault")
             fault++;
 
-        if(vehicle.status==="absence")
+
+        if(vehicle.status === "absence")
             absence++;
 
 
@@ -51,47 +56,55 @@ function displayVehicles(list = vehicles){
 
         let card = document.createElement("div");
 
-        card.className="vehicle-card";
+        card.className = "vehicle-card";
 
 
 
-        let statusText="";
-
-        let statusClass="";
-
+        let statusText = "";
+        let statusClass = "";
 
 
-        if(vehicle.status==="working"){
 
-            statusText="تعمل";
-            statusClass="status-working";
+        switch(vehicle.status){
+
+
+            case "working":
+
+                statusText = "تعمل";
+                statusClass = "status-working";
+
+            break;
+
+
+
+            case "fault":
+
+                statusText = "لا تعمل";
+                statusClass = "status-fault";
+
+            break;
+
+
+
+            case "absence":
+
+                statusText = "غياب";
+                statusClass = "status-absence";
+
+            break;
+
 
         }
 
 
-        if(vehicle.status==="fault"){
-
-            statusText="عطل";
-            statusClass="status-fault";
-
-        }
 
 
-        if(vehicle.status==="absence"){
-
-            statusText="غياب";
-            statusClass="status-absence";
-
-        }
-
-
-
-
-        card.innerHTML=`
+        card.innerHTML = `
 
         <div class="vehicle-number">
         ${vehicle.number}
         </div>
+
 
         <div class="status ${statusClass}">
         ${statusText}
@@ -101,7 +114,7 @@ function displayVehicles(list = vehicles){
 
 
 
-        card.onclick=function(){
+        card.onclick = function(){
 
             openPopup(vehicle);
 
@@ -110,23 +123,21 @@ function displayVehicles(list = vehicles){
 
 
 
-        if(vehicle.type==="private"){
+        if(vehicle.type === "private"){
 
             privateList.appendChild(card);
 
         }
 
 
-
-        else if(vehicle.type==="truck"){
+        else if(vehicle.type === "truck"){
 
             truckList.appendChild(card);
 
         }
 
 
-
-        else if(vehicle.type==="equipment"){
+        else if(vehicle.type === "equipment"){
 
             equipmentList.appendChild(card);
 
@@ -138,9 +149,11 @@ function displayVehicles(list = vehicles){
 
 
 
-    workingCount.textContent=working;
-    faultCount.textContent=fault;
-    absenceCount.textContent=absence;
+    workingCount.textContent = working;
+
+    faultCount.textContent = fault;
+
+    absenceCount.textContent = absence;
 
 
 
@@ -151,6 +164,8 @@ function displayVehicles(list = vehicles){
 
 
 
+
+// فتح نافذة المركبة
 
 function openPopup(vehicle){
 
@@ -162,6 +177,9 @@ function openPopup(vehicle){
     "المركبة : " + vehicle.number;
 
 
+    selectedVehicle = vehicle;
+
+
 }
 
 
@@ -170,9 +188,70 @@ function openPopup(vehicle){
 
 
 
-closeBtn.onclick=function(){
+
+// تغيير حالة المركبة
+
+function changeStatus(status){
+
+
+    if(!selectedVehicle)
+        return;
+
+
+
+    selectedVehicle.status = status;
+
+
+
+
+    let record = {
+
+
+        vehicle: selectedVehicle.number,
+
+
+        status: status,
+
+
+        date: new Date().toLocaleDateString("ar-SA"),
+
+
+        time: new Date().toLocaleTimeString("ar-SA")
+
+
+    };
+
+
+
+    console.log("تم تسجيل:", record);
+
+
+
+
+    displayVehicles();
+
+
 
     popup.classList.add("hidden");
+
+
+
+}
+
+
+
+
+
+
+
+
+// إغلاق النافذة
+
+closeBtn.onclick = function(){
+
+
+    popup.classList.add("hidden");
+
 
 };
 
@@ -180,17 +259,26 @@ closeBtn.onclick=function(){
 
 
 
-search.addEventListener("input",function(){
 
 
-    let value=this.value.trim();
+
+// البحث
+
+search.addEventListener("input", function(){
 
 
-    let result = vehicles.filter(v=>
+    let value = this.value.trim();
 
-        v.number.includes(value)
+
+
+    let result = vehicles.filter(vehicle =>
+
+
+        vehicle.number.includes(value)
+
 
     );
+
 
 
     displayVehicles(result);
@@ -202,5 +290,10 @@ search.addEventListener("input",function(){
 
 
 
+
+
+
+
+// تشغيل الصفحة
 
 displayVehicles();
