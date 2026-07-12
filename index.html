@@ -89,7 +89,6 @@ placeholder="ابحث برقم المركبة..."
 </section>
 
 
-
 </div>
 
 
@@ -97,6 +96,9 @@ placeholder="ابحث برقم المركبة..."
 
 
 
+
+
+<!-- نافذة التحكم -->
 
 
 <div id="popup" class="popup hidden">
@@ -108,19 +110,29 @@ placeholder="ابحث برقم المركبة..."
 <h2 id="vehicleTitle"></h2>
 
 
-<button id="maintenanceBtn">
-🔧 طلب صيانة
+
+<button onclick="changeStatus('working')">
+✅ تعمل
 </button>
 
 
-<button id="absenceBtn">
-👤 إشعار غياب
+
+<button onclick="changeStatus('fault')">
+❌ لا تعمل
 </button>
+
+
+
+<button onclick="changeStatus('absence')">
+👤 غياب
+</button>
+
 
 
 <button id="detailsBtn">
 📄 التفاصيل
 </button>
+
 
 
 <button id="closeBtn" class="close">
@@ -132,6 +144,7 @@ placeholder="ابحث برقم المركبة..."
 
 
 </div>
+
 
 
 
