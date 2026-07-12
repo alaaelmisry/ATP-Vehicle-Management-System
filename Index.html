@@ -1,142 +1,83 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATP Vehicle Management</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>ATP Vehicle Management</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
 
-<h1>🚗 ATP Vehicle Management</h1>
+    <h1>🚗 ATP Vehicle Management</h1>
 
-<div class="topButtons">
+    <div class="stats">
+        <div class="card green">
+            <span id="workingCount">0</span>
+            <small>تعمل</small>
+        </div>
 
-<button id="adminBtn">
-دخول المشرف
-</button>
+        <div class="card red">
+            <span id="faultCount">0</span>
+            <small>أعطال</small>
+        </div>
 
-<button id="addBtn" style="display:none;">
-➕ إضافة صف
-</button>
+        <div class="card yellow">
+            <span id="absenceCount">0</span>
+            <small>غياب</small>
+        </div>
+    </div>
 
-</div>
+    <input
+        type="text"
+        id="search"
+        placeholder="ابحث برقم المركبة..."
+    >
 
 </header>
 
-<div class="tableContainer">
+<main>
 
-<table id="vehicleTable">
+    <div id="vehicleList" class="vehicle-list">
 
-<thead>
+        <!-- سيتم إنشاء المركبات تلقائياً -->
 
-<tr>
+    </div>
 
-<th>مسلسل</th>
+</main>
 
-<th>اللوحة</th>
+<!-- نافذة الخيارات -->
 
-<th>المفوض</th>
+<div id="popup" class="popup hidden">
 
-<th>الحالة</th>
+    <div class="popup-box">
 
-<th>عرض التفاصيل</th>
+        <h2 id="vehicleTitle"></h2>
 
-</tr>
+        <button id="maintenanceBtn">
+            🔧 طلب صيانة
+        </button>
 
-</thead>
+        <button id="absenceBtn">
+            👤 إشعار غياب
+        </button>
 
-<tbody id="tableBody">
+        <button id="detailsBtn">
+            📄 التفاصيل
+        </button>
 
-</tbody>
+        <button id="closeBtn" class="close">
+            إغلاق
+        </button>
 
-</table>
-
-</div>
-
-<!-- نافذة تسجيل دخول المشرف -->
-
-<div id="loginBox" class="modal">
-
-<div class="modalContent">
-
-<h2>دخول المشرف</h2>
-
-<input
-type="password"
-id="adminPassword"
-placeholder="أدخل الرقم السري">
-
-<div class="modalButtons">
-
-<button onclick="login()">
-دخول
-</button>
-
-<button onclick="closeLogin()">
-إلغاء
-</button>
+    </div>
 
 </div>
 
-</div>
-
-</div>
-
-<!-- نافذة إضافة صف -->
-
-<div id="addBox" class="modal">
-
-<div class="modalContent">
-
-<h2>إضافة مركبة</h2>
-
-<input
-type="text"
-id="plate"
-placeholder="رقم اللوحة">
-
-<input
-type="text"
-id="driver"
-placeholder="اسم المفوض">
-
-<select id="status">
-
-<option>تعمل</option>
-
-<option>لا تعمل</option>
-
-</select>
-
-<div class="modalButtons">
-
-<button onclick="saveVehicle()">
-حفظ
-</button>
-
-<button onclick="closeAdd()">
-إلغاء
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<script type="module" src="firebase.js"></script>
-
+<script src="data.js"></script>
 <script src="script.js"></script>
 
 </body>
-
 </html>
