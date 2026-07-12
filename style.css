@@ -1,175 +1,369 @@
-*{
+* {
+    box-sizing: border-box;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+
+body {
+
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Tahoma, Arial, sans-serif;
-}
-
-body{
-    background:#f4f6f9;
+    background:#f2f4f7;
     direction:rtl;
+
 }
 
-header{
-    background:#0f4c81;
+
+
+header {
+
+    background:#1f2937;
     color:white;
     padding:20px;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-header h1{
     text-align:center;
-    margin-bottom:20px;
+
 }
 
-.stats{
+
+
+header h1 {
+
+    margin:0 0 20px;
+    font-size:28px;
+
+}
+
+
+
+.stats {
+
     display:flex;
-    gap:10px;
     justify-content:center;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
-
-.card{
-    width:110px;
-    height:70px;
-    border-radius:10px;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-}
-
-.card span{
-    font-size:24px;
-}
-
-.green{
-    background:#2e7d32;
-}
-
-.red{
-    background:#c62828;
-}
-
-.yellow{
-    background:#f9a825;
-    color:black;
-}
-
-#search{
-    width:100%;
-    max-width:500px;
-    display:block;
-    margin:auto;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-}
-
-.vehicle-list{
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
     gap:15px;
+    flex-wrap:wrap;
+
 }
 
-.vehicle{
-    padding:20px;
+
+
+.card {
+
+    width:120px;
+    padding:15px;
     border-radius:12px;
     color:white;
-    text-align:center;
     font-size:22px;
-    cursor:pointer;
-    transition:0.3s;
     font-weight:bold;
+
 }
 
-.vehicle:hover{
-    transform:scale(1.04);
+
+
+.card small {
+
+    display:block;
+    font-size:14px;
+    margin-top:5px;
+
 }
 
-.vehicle.green{
-    background:#2e7d32;
+
+
+.green {
+
+    background:#16a34a;
+
 }
 
-.vehicle.red{
-    background:#c62828;
+
+.red {
+
+    background:#dc2626;
+
 }
 
-.vehicle.yellow{
-    background:#f9a825;
-    color:black;
+
+.yellow {
+
+    background:#ca8a04;
+
 }
 
-.popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
 
-.hidden{
-    display:none;
-}
 
-.popup-box{
+
+#search {
+
+    margin-top:20px;
     width:90%;
-    max-width:380px;
-    background:white;
-    border-radius:15px;
-    padding:25px;
-}
-
-.popup-box h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.popup-box button{
-    width:100%;
-    margin:8px 0;
-    padding:15px;
+    max-width:400px;
+    padding:12px;
+    border-radius:8px;
     border:none;
+    font-size:16px;
+
+}
+
+
+
+
+
+.categories {
+
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    padding:20px;
+
+
+}
+
+
+
+.category {
+
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:0 3px 10px #ccc;
+
+
+}
+
+
+
+.category h2 {
+
+
+    text-align:center;
+
+    background:#111827;
+
+    color:white;
+
+    padding:10px;
+
     border-radius:10px;
-    font-size:18px;
+
+    margin-top:0;
+
+
+}
+
+
+
+
+.vehicle-list {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+
+}
+
+
+
+
+
+.vehicle-card {
+
+
+    background:#ffffff;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:12px;
+
     cursor:pointer;
+
+    transition:.2s;
+
 }
 
-#maintenanceBtn{
-    background:#d32f2f;
+
+
+.vehicle-card:hover {
+
+
+    transform:scale(1.02);
+
+}
+
+
+
+.vehicle-number {
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+
+.status {
+
+
+    margin-top:8px;
+
+    padding:5px;
+
+    border-radius:6px;
+
+    text-align:center;
+
     color:white;
+
+
 }
 
-#absenceBtn{
-    background:#f9a825;
+
+
+.status-working {
+
+    background:#16a34a;
+
 }
 
-#detailsBtn{
-    background:#1976d2;
+
+.status-fault {
+
+    background:#dc2626;
+
+}
+
+
+.status-absence {
+
+    background:#ca8a04;
+
+}
+
+
+
+
+
+.popup {
+
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+}
+
+
+
+.hidden {
+
+    display:none;
+
+}
+
+
+
+.popup-box {
+
+
+    background:white;
+
+    width:90%;
+
+    max-width:350px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+
+}
+
+
+
+.popup-box button {
+
+
+    width:100%;
+
+    padding:12px;
+
+    margin:7px 0;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+
+}
+
+
+
+.close {
+
+    background:#374151;
+
     color:white;
+
 }
 
-.close{
-    background:#616161;
-    color:white;
+
+
+
+
+
+/* توافق الجوال */
+
+
+@media(max-width:900px){
+
+
+.categories {
+
+    grid-template-columns:1fr;
+
 }
 
-@media(max-width:600px){
 
-.vehicle-list{
-grid-template-columns:1fr;
+
 }
 
-.vehicle{
-font-size:20px;
+
+@media(min-width:901px){
+
+
+.category {
+
+    min-height:600px;
+
 }
+
 
 }
