@@ -416,3 +416,20 @@ header h1 {
 
 
 }
+
+.vehicle-notes{
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    color:#555;
+
+    min-height:18px;
+
+    text-align:center;
+
+    word-break:break-word;
+
+}
+
