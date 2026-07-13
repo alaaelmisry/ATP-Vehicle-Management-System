@@ -45,23 +45,52 @@ privateNumbers.forEach((number, index) => {
 
 // TRUCKS 35 شاحنة
 
-for(let i=1; i<=35; i++){
+const truckNumbers = [
+    "7001",
+    "7002",
+    "7003",
+    "7004",
+    "7005",
+    "7006",
+    "7007",
+    "7008",
+    "7009",
+    "7010",
+    "7011",
+    "7012",
+    "7013",
+    "7014",
+    "7015",
+    "7016",
+    "7017",
+    "7018",
+    "7019",
+    "7020",
+    "7021",
+    "7022",
+    "7023",
+    "7024",
+    "7025",
+    "7026",
+    "7027",
+    "7028",
+    "7029",
+    "7030",
+    "7031",
+    "7032",
+    "7033",
+    "7034",
+    "7035"
+];
 
+truckNumbers.forEach((number, index) => {
     vehicles.push({
-
-        id:30+i,
-
-        number:"T-" + String(i).padStart(3,"0"),
-
-        type:"truck",
-
-        status:"working"
-
+        id: 31 + index,
+        number: number,
+        type: "truck",
+        status: "working"
     });
-
-}
-
-
+});
 
 
 // EQUIPMENTS 35 معدة
