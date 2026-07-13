@@ -3,21 +3,54 @@ const vehicles = [];
 
 // PRIVATE 30 مركبة
 
-for(let i=1; i<=30; i++){
+const privateNumbers = [
+    "4552",
+    "4553",
+    "4554",
+    "4555",
+    "4556",
+    "4557",
+    "4558",
+    "4559",
+    "4560",
+    "4561",
+    "4562",
+    "4563",
+    "4564",
+    "4565",
+    "4566",
+    "4567",
+    "4568",
+    "4569",
+    "4570",
+    "4571",
+    "4572",
+    "4573",
+    "4574",
+    "4575",
+    "4576",
+    "4577",
+    "4578",
+    "4579",
+    "4580",
+    "4581"
+];
+
+privateNumbers.forEach((number, index) => {
 
     vehicles.push({
 
-        id:i,
+        id: index + 1,
 
-        number:"P-" + String(i).padStart(3,"0"),
+        number: number,
 
-        type:"private",
+        type: "private",
 
-        status:"working"
+        status: "working"
 
     });
 
-}
+});
 
 
 
