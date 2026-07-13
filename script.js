@@ -101,22 +101,17 @@ function displayVehicles(list = vehicles){
 
 
 
-       card.innerHTML=`
+    card.innerHTML = `
+    <div class="vehicle-number">${vehicle.number}</div>
 
-<div class="vehicle-number">
-${vehicle.number}
-</div>
+    <div class="status ${statusClass}">
+        ${statusText}
+    </div>
 
-<div class="status ${statusClass}">
-${statusText}
-</div>
-
-<div class="vehicle-notes">
-${vehicle.notes ? "📝 " + vehicle.notes : ""}
-</div>
-
+    <div class="vehicle-notes">
+        ${vehicle.notes || ""}
+    </div>
 `;
-
 
         card.onclick=function(){
 
