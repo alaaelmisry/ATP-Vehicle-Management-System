@@ -34,9 +34,8 @@ privateNumbers.forEach((number, index) => {
 
         type: "private",
 
-        status: "working"
-
-        notes : ""
+       status: "working",
+notes: ""
 
     });
 
@@ -90,8 +89,8 @@ truckNumbers.forEach((number, index) => {
         id: 31 + index,
         number: number,
         type: "truck",
-        status: "working"
-        notes : ""
+       status: "working",
+notes: ""
     });
 });
 
@@ -108,9 +107,8 @@ for(let i=1; i<=35; i++){
 
         type:"equipment",
 
-        status:"working"
-
-        notes : ""
+      status: "working",
+notes: ""
 
     });
 
