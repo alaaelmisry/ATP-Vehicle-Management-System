@@ -101,18 +101,21 @@ function displayVehicles(list = vehicles){
 
 
 
-        card.innerHTML=`
+       card.innerHTML=`
 
-        <div class="vehicle-number">
-        ${vehicle.number}
-        </div>
+<div class="vehicle-number">
+${vehicle.number}
+</div>
 
-        <div class="status ${statusClass}">
-        ${statusText}
-        </div>
+<div class="status ${statusClass}">
+${statusText}
+</div>
 
-        `;
+<div class="vehicle-notes">
+${vehicle.notes ? "📝 " + vehicle.notes : ""}
+</div>
 
+`;
 
 
         card.onclick=function(){
@@ -205,7 +208,24 @@ function requestStatusChange(status){
 
 }
 
+function editNotes(){
 
+    let note = prompt(
+        "أدخل الملاحظة:",
+        selectedVehicle.notes || ""
+    );
+
+    if(note !== null){
+
+        selectedVehicle.notes = note;
+
+        displayVehicles();
+
+        popup.classList.add("hidden");
+
+    }
+
+}
 
 
 
